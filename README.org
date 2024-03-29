@@ -1,5 +1,9 @@
 * orgdict
 library for converting Emacs org-mode files to a nested Python dictionary, and back 
+** Installation
+
+Copy the repo, or the single Python file, and then move it to wherever you want to be able to import it from
+
 ** Usage
 
 Using the example.org file from https://writequit.org/denver-emacs/presentations/files/example.org.html
@@ -23,3 +27,13 @@ $ diff example.org example\!.org
 > * This is an example headline!
 $
 #+END_SRC
+
+** API
+
+Once you've read an org file, you can expect each level of the nested dictionary to have some subset of these fields:
+
+- title: the title of the section
+- prologue: whatever comes between the heading and the properties
+- properties: a dictionary of properties under this headline
+- content: an array of lines that make up the content under this heading up until the first subsection
+- sections: an array of dictionaries just like the top level one, for each subheading.
