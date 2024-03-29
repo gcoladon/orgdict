@@ -1,0 +1,25 @@
+* orgdict
+library for converting Emacs org-mode files to a nested Python dictionary, and back 
+** Usage
+
+Using the example.org file from https://writequit.org/denver-emacs/presentations/files/example.org.html
+
+#+BEGIN_SRC python
+import orgdict
+
+d = orgdict.read("example.org")
+d.keys() # dict_keys(['line', 'content', 'sections'])
+len(d['sections']) # 10
+d['sections'][0]['title'] # 'This is an example headline'
+d['sections'][0]['title'] += "!"
+orgdict.write("example!.org", d)
+#+END_SRC
+
+#+BEGIN_SRC sh
+$ diff example.org example\!.org
+7c7
+< * This is an example headline
+---
+> * This is an example headline!
+$
+#+END_SRC
